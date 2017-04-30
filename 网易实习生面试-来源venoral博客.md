@@ -25,15 +25,26 @@ A.white-space：normal   B.overflow:hidden  C.overflow:auto  D.text-overflow:ell
 
 normal 默认，连续的空白符会被合并，换行符会被当作空白符来处理，填充line盒子时，必要的话会换行。
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327110704995-683836716.jpg)
+
 nowrap 翻译过来意思是"不包裹"，连续的空白符和换行符会被合并，但文本触碰到边界自动的换行无效，不包裹就体现出了，文本超出给定长度不会换行。
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327110853964-880413978.png)
+
 pre 连续的空白符会被保留，在遇到换行符或者元素时才会换行。相当于HTML中的 pre 标签，可预定义格式化的文本。
 
+
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327104741620-89396496.png)
+
 pre-wrap 上面的pre很死板，超出盒子就超出，而pre-wrap意为格式化包裹，既能格式化又能让盒子包裹，所以是连续的空白符会被保留，在遇到换行符或者<br>元素或者需要为了填充line盒子时才会换行。
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327110323339-894959475.png)
+
 pre-line 连续的空格符会被合并，在遇到换行符或者<br>元素或者需要为了填充line盒子时才会换行。这个更人性化了，注重格式化但更注重换行。
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327110109870-1893349560.png)
+
+
 
 下面表格总结了white-space行为
 
@@ -48,26 +59,53 @@ pre-line 连续的空格符会被合并，在遇到换行符或者<br>元素或�
 **overflow：**该属性用于block型元素上，规定**当内容元素溢出元素框时要发生的事（即是否设置可修剪并以什么方式修剪）**：可裁剪内容（隐藏，滚动条），不修剪（直接显示超出部分）。默认值为visible，该属性不继承。使用overflow默认值以外的值将创建一个新的块级格式上下文（BFC）。想了解BFC的同学请戳[深入理解BFC和Margin Collapse](http://www.w3cplus.com/css/understanding-bfc-and-margin-collapse.html)。
 取值 visible | hidden | scroll | auto | inherit
 visible 默认值，内容不会被修剪，会呈现在元素框之外。
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327113334729-745991071.png)
+
+
+
 hidden 内容会被修剪且其余内容是不可见的
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327113457761-1422690863.png)
+
+
+
 scroll 内容会被修剪并且浏览器使用滚动条以便查看其内容，但打印机会打印溢出的内容。
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327113748495-674442486.png)
+
 auto 取决于用户代理，必要时显示那个方向的滚动条，FF和chrome会提供滚动条。
+
+
+
  ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327114001526-1097341967.png)
-**text-overflow：**决定溢出的内容怎么修剪即以何种形式提示用户，使用该属性的前提是溢出的内容已被设置为可修剪（溢出和修剪是两个概念，溢出后先要设置可被修剪才能设置怎么修剪，否则只设置怎么修剪是不起作用的）。它可以直接剪切（clipped），也可以显示一个省略号，或者显示一个自定义的符号。默认值是clip，适用所有块级元素，没有继承性。
+
+
+text-overflow：**决定溢出的内容怎么修剪即以何种形式提示用户，使用该属性的前提是溢出的内容已被设置为可修剪（溢出和修剪是两个概念，溢出后先要设置可被修剪才能设置怎么修剪，否则只设置怎么修剪是不起作用的）。它可以直接剪切（clipped），也可以显示一个省略号，或者显示一个自定义的符号。默认值是clip，适用所有块级元素，没有继承性。
+
+
 
  取值 clip | ellipsis | string
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327134845870-1801612078.png)
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327134947948-1650247493.png)
+
+
+
 此时怎么设置text-overflow都不起作用，因为当前的overflow值为visible意为不可修剪的（ window.getComputedStyle($('p')).overflow;// "visible" ）。
 
 设置overflow为可修剪后（取值hidden，scroll，auto均可），这里以overflow:hidden为例
 clip 默认值，修剪文本
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327135225901-1657700500.png)
+
 ellipsis 显示省略符合代替被修剪的文本
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327135326104-967022038.png)
+
 string 使用给定的字符串来代替被修剪的文本。Chrome浏览器不支持无法演示。
+
+
 
 2.红色区域的宽度多大？
 
@@ -89,13 +127,18 @@ string 使用给定的字符串来代替被修剪的文本。Chrome浏览器不�
 **盒模型：**文档中每个元素被描绘成矩形盒子，确定其大小，属性（颜色背景边框等），以及位置是渲染引擎的目标。
 css下这些盒子由标准盒模型描述，这个模型描述元素内容占用空间，盒子有四个边界（外边距边界margin edge，边框边界border edge，内边距边界padding edge，内容边界content edge）
 
+
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327142032058-1966782904.png)
+
+
 
 content内容区域 是真正包含元素内容的区域，它的大小为内容宽度/高度或content-box宽/高。如果box-sizing是默认值(content-box)，则由width/height，min-width/min-height，max-width/max-height确定其大小。
 padding内边距区域 是内容及可能有的边框之间的空白域，用来扩展内容区域。它位于内边距边界内部，背景为颜色或图片（不透明的图片会盖住颜色）。它的大小为padding-box宽和padding-box高。
 border边框区域  是包含边框的区域，扩展了内边距区域，大小为border-box宽/高。由border-width及简写属性border控制。
 margin外边距区域  用空白区域扩展边框区域，以分开相邻的元素。大小为margin-box的高宽。在外边距合并的情况下盒之间会共享外边距（margin重叠问题可参考[css margin重叠的问题](http://www.zhangxinxu.com/study/200908/margin-overlap.html)）。 
 注意对于行内非替换元素，其占据高度由line-height决定，与margin和padding无关，为什么？这就要说起em框，内容区，行间距，行内框，行框等概念了想深入的同学可戳[一些常用css技巧的为什么（二）我所理解的line-height](http://www.cnblogs.com/venoral/p/5218538.html)。
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327150120589-179789969.png)
 反正你就记住行内非替换元素占据高度（应该说是该行与上一行或下一行之间关系）与margin和padding怎么设置都无关。
 **box-sizing：**用来改变css盒模型对于宽高的计算方式，默认值为content-box，适用于所有元素，没有继承性。
@@ -105,10 +148,15 @@ border-box width和height包括padding和border，不包括margin。这是IE怪�
 **background-clip: **设置元素的背景（背景图片或颜色）是否延伸到边框下面。默认值为border-box，适用于所有元素，没有继承性。
 取值 border-box | padding-box | content-box
 border-box 背景延伸到边框外沿但是在边框之下。
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327153253464-483659683.png)
+
 padding-box 边框下面没有背景，即延伸到padding的外沿。
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327153551745-1098344333.png)
+
 content-box 背景裁剪到内容区content-box外沿。
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327153642308-612613875.png)
 
 **JavaScript**1.alert分别输出什么值？
@@ -264,11 +312,14 @@ A.ICMP  B.TCP  C.IP  D.UDP
 解析：选A
 维基百科介绍：ping是一种电脑网络工具，用来测试数据包能否通过IP协议到达特定主机，ping的运作原理是向目标主机传出一个ICMP echo@要求的数据包，并等待接收echo回应的数据包。程序按时间和成功响应的次数估算丢失的数据包率（丢包率）和数据包往返时间（网络时延）。
 ICMP：网际控制报文协议，是IP层的一个组成部分，它传递差错报文以及其他需要注意的信息。ICMP报文通常被IP层或更高层协议（TCP/UDP）使用。由图看出它是IP的一部分，而且必须在每个IP模块中实现。
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327205518042-1762919648.jpg)
 干脆学习一下TCP/IP协议族吧：
 互联网协议族（IPS）是一个网络通信模型+一整个网络传输协议家族，它是互联网通信的基础架构。也被成为TCP/IP协议族，简称TCP/IP，这个协议家族的两个核心协议包括TCP（传输控制协议）和IP（网际协议）。在网络通讯协议普遍采用分层的结构，当多个层次协议共同工作时，类似于计算机中堆栈。TCP/IP提供点对点链接机制，将数据应该如何封装，定址，传输，路由以及在目的地如何接收都加以标准化。它将软件通讯过程抽象化为四个抽象层，采用协议堆栈的方式，分别实现不同通讯协议。
 七层OSI模型
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327205624808-2100168427.png)
+
 物理层：通过媒介传输**比特Bit**。
 数据链路层：将比特组装成**帧**和点到点的传递，在两个网络实体间提供数据链路连接的创建，维持和释放管理。
 网络层：提供路由和寻址功能，负责**数据包**从源到宿的传递和网际互连。
@@ -277,7 +328,10 @@ ICMP：网际控制报文协议，是IP层的一个组成部分，它传递差�
 表示层：对数据进行翻译，加密和压缩。为不同终端的上层用户提供数据和信息的正确语法表示转换方法。（**表示协议数据单元**PPDU）
 应用层：直接和应用程序接口并提供常见的网络应用服务。（**应用协议数据单元**APDU）
 TCP/IP四层模型
+
 ![img](http://images2015.cnblogs.com/blog/861164/201603/861164-20160327205725198-2109435154.png)
+
+
 
 2.以下HTTP头信息中，跟缓存有关的有？
 
