@@ -297,7 +297,7 @@ C. It does nothing
 
 #### 2.5 Does `overflow: hidden` create a new block formatting context?
 
-译：新创建隐藏的块级元素文本是否溢出？ **
+译：新创建的块级元素设置溢出隐藏时，其文本是否溢出？ **
 
 ```html
 <div>
